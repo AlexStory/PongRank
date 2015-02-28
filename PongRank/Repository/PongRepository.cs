@@ -47,14 +47,14 @@ namespace PongRank.Repository {
 
     public void AddGame(string w, string l) {
       var win = from Player in _dbContext.Players
-                    where Player.Name = w
+                    where Player.Name == w
                     select Player;
       var lose = from Player in _dbContext.Players
-                    where Player.Name = l
+                    where Player.Name == l
                     select Player;
-      _dbContext.Games.Add(g);
-      Game g = new Game (win, lose);
-      _dbContext.SaveChanges();
+        Game g = new Game(win.First<Player>(), lose.First<Player>());
+        _dbContext.Games.Add(g);
+        _dbContext.SaveChanges();
     }
   }
 }

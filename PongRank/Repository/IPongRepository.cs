@@ -8,6 +8,6 @@ namespace PongRank.Repository {
   interface IPongRepository {
 
      void AddPlayer(Player p);
-     void AddGame(Game G);
+     void AddGame(string w, string l);
   }
 }

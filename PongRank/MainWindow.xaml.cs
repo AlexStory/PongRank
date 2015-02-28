@@ -23,6 +23,7 @@ namespace PongRank {
     public static PongRepository repo = new PongRepository();
 
     public MainWindow() {
+
       InitializeComponent();
       PlayerTable.DataContext = repo.PlayerContext();
       WinnerBox.DataContext = repo.PlayerContext();
@@ -36,8 +37,12 @@ namespace PongRank {
     }
 
     private void add_game(object sender, RoutedEventArgs e) {
-      var player = new Player(NewPlayerName.Text);
-      repo.AddGame(WinnerBox.SelectedValue.ToString(), loser.SelectedValue.ToString());
+        var winner = WinnerBox.SelectedItem as Player;
+        winner.AddWin();
+
+        repo.PlayerContext().First<Player>().AddWin();
+
+        PlayerTable.DataContext = repo.PlayerContext();
     }
     
 
